@@ -72,11 +72,14 @@ with col3:
     show_hint = st.checkbox("Show hint", value=True)
 
 if new_game:
-    # FIXME: Logic breaks here: New Game only resets attempts and secret, so the player can't start a new game.
-    # status stays "won"/"lost", so st.stop() at line 151 blocks everything. score and history are never
-    # cleared, and the secret ignores the difficulty range (uses randint(1, 100)).
-    st.session_state.attempts = 0
-    st.session_state.secret = random.randint(1, 100)
+    # FIX: New Game now resets status, score and history too (status stuck on "won"/"lost" was
+    # blocking play via st.stop()), uses the difficulty's range, and starts attempts at 1 to match
+    # the first game. Fixed with Claude Code; verified with a headless game run.
+    st.session_state.attempts = 1
+    st.session_state.secret = random.randint(low, high)
+    st.session_state.score = 0
+    st.session_state.status = "playing"
+    st.session_state.history = []
     st.success("New game started.")
     st.rerun()
 
