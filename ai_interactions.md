@@ -28,9 +28,9 @@
 
 | Edge Case | Prompt Used | AI-Suggested Test | Did It Pass? | Your Reasoning |
 |-----------|-------------|-------------------|--------------|----------------|
-| | | | | |
-| | | | | |
-| | | | | |
+| Non-numeric text ("abc") | Asked Claude Code to add easy edge-case pytest tests for the moved `parse_guess` | `test_parse_guess_non_numeric_text`: expects `(False, None, "That is not a number.")` | Yes | Players can type anything; the game must reject it with a clear error instead of crashing. |
+| Empty string ("") | Same prompt | `test_parse_guess_empty_string`: expects `(False, None, "Enter a guess.")` | Yes | Blank input is related to the blank-guess bug; this pins the current rejection message. |
+| Negative number ("-5") | Same prompt | `test_parse_guess_negative_number`: expects `(True, -5, None)` | Yes | Documents the current behavior: negatives are parsed as valid ints (the range is not enforced here). |
 
 ---
 
