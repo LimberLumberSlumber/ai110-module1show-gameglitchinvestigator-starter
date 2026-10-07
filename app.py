@@ -34,11 +34,14 @@ def check_guess(guess, secret):
         return "Win", "🎉 Correct!"
 
     try:
+        # FIXME: Logic breaks here: hints are inverted. guess > secret should say "Go LOWER!"
         if guess > secret:
             return "Too High", "📈 Go HIGHER!"
         else:
+            # FIXME: Logic breaks here: guess < secret should say "Go HIGHER!"
             return "Too Low", "📉 Go LOWER!"
     except TypeError:
+        # FIXME: string-comparison fallback is wrong (e.g. "9" > "10") and repeats the inverted hints below
         g = str(guess)
         if g == secret:
             return "Win", "🎉 Correct!"
@@ -132,6 +135,9 @@ with col3:
     show_hint = st.checkbox("Show hint", value=True)
 
 if new_game:
+    # FIXME: Logic breaks here: New Game only resets attempts and secret, so the player can't start a new game.
+    # status stays "won"/"lost", so st.stop() at line 151 blocks everything. score and history are never
+    # cleared, and the secret ignores the difficulty range (uses randint(1, 100)).
     st.session_state.attempts = 0
     st.session_state.secret = random.randint(1, 100)
     st.success("New game started.")
@@ -155,6 +161,7 @@ if submit:
     else:
         st.session_state.history.append(guess_int)
 
+        # FIXME: secret is cast to str on even attempts, which forces check_guess into the string-compare branch
         if st.session_state.attempts % 2 == 0:
             secret = str(st.session_state.secret)
         else:

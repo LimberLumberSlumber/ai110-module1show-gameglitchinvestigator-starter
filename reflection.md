@@ -21,10 +21,10 @@ Document at least 3 bugs you found. Add rows as needed.
 
 | Input | Expected Behavior | Actual Behavior | Console Output / Error | Suspected Code Location |
 |-------|-------------------|-----------------|------------------------|-------------------------|
-| Secret 50 (from debug info), guess 22 | "📈 Go HIGHER!" (Too Low) | "📉 Go LOWER!" shown | none | app.py `check_guess`, lines 38, 40, 46, 47 |
-| Typed a guess and pressed Enter | Guess is submitted | Nothing happens until Submit is clicked | none | app.py line 121 (`st.text_input`) |
-| Pressed New Game (after a win or loss) | Full reset and playable again | Only Attempts Left, Secret, and Attempts reset; buttons do nothing | none | app.py lines 134-138, 140-145 |
-| Left the guess box empty and pressed Submit repeatedly | Rejected without exceeding the attempt limit | Attempts exceed the limit and the game never ends | "Enter a guess." | app.py lines 148-154, 182-188 |
+| Secret 50 (from debug info), guess 22 | "📈 Go HIGHER!" (Too Low) | "📉 Go LOWER!" shown | none | app.py `check_guess`, lines 39, 42, 49, 50 |
+| Typed a guess and pressed Enter | Guess is submitted | Nothing happens until Submit is clicked | none | app.py line 124 (`st.text_input`) |
+| Pressed New Game (after a win or loss) | Full reset and playable again | Only Attempts Left, Secret, and Attempts reset; buttons do nothing | none | app.py lines 137-144, 146-151 |
+| Left the guess box empty and pressed Submit repeatedly | Rejected without exceeding the attempt limit | Attempts exceed the limit and the game never ends | "Enter a guess." | app.py lines 154-160, 189-195 |
 
 ---
 
